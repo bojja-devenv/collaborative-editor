@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../node_modules/@codemirror/legacy-modes/mode/diff.js"],
-  "sourcesContent": ["var TOKEN_NAMES = {\n  '+': 'inserted',\n  '-': 'deleted',\n  '@': 'meta'\n};\nexport const diff = {\n  name: \"diff\",\n  token: function (stream) {\n    var tw_pos = stream.string.search(/[\\t ]+?$/);\n    if (!stream.sol() || tw_pos === 0) {\n      stream.skipToEnd();\n      return (\"error \" + (TOKEN_NAMES[stream.string.charAt(0)] || '')).replace(/ $/, '');\n    }\n    var token_name = TOKEN_NAMES[stream.peek()] || stream.skipToEnd();\n    if (tw_pos === -1) {\n      stream.skipToEnd();\n    } else {\n      stream.pos = tw_pos;\n    }\n    return token_name;\n  }\n};"],
-  "mappings": ";;;AAAA,IAAI,cAAc;AAAA,EAChB,KAAK;AAAA,EACL,KAAK;AAAA,EACL,KAAK;AACP;AACO,IAAM,OAAO;AAAA,EAClB,MAAM;AAAA,EACN,OAAO,SAAU,QAAQ;AACvB,QAAI,SAAS,OAAO,OAAO,OAAO,UAAU;AAC5C,QAAI,CAAC,OAAO,IAAI,KAAK,WAAW,GAAG;AACjC,aAAO,UAAU;AACjB,cAAQ,YAAY,YAAY,OAAO,OAAO,OAAO,CAAC,CAAC,KAAK,KAAK,QAAQ,MAAM,EAAE;AAAA,IACnF;AACA,QAAI,aAAa,YAAY,OAAO,KAAK,CAAC,KAAK,OAAO,UAAU;AAChE,QAAI,WAAW,IAAI;AACjB,aAAO,UAAU;AAAA,IACnB,OAAO;AACL,aAAO,MAAM;AAAA,IACf;AACA,WAAO;AAAA,EACT;AACF;",
-  "names": []
-}
