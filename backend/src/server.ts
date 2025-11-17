@@ -30,13 +30,35 @@ const base64Encoded = fromUint8Array(documentState)
 
 // Transform Base64-String back to an Uint8Array
 const binaryEncoded = toUint8Array(base64Encoded)
-  ws.on('message', function message(data, isBinary) {
-    const message = isBinary ? data : data.toString();
-    console.log("************************");
-   console.log('received: %s', message);
-    // Apply updates from the client
 
-    
+ws.on('message', function message(data, isBinary) {
+    console.log(`Received message. isBinary: ${isBinary}`);
+ 
+    if (isBinary) {
+      console.log('Received binary data:', data);
+      const base64String = data.toString('base64');
+      console.log('Base64 Encoded String:', base64String);
+      const decodedBuffer = Buffer.from(base64String, 'base64');
+      console.log('Decoded Buffer:', decodedBuffer);
+      const originalString = decodedBuffer.toString('utf8'); // or just decodedBuffer.toString()
+      console.log('Base64 Encoded:', base64String);
+      console.log('Decoded String:', originalString);
+    } else {
+      // Handle text data
+      // 'data' is a Buffer, so convert it to a string
+      const messageString = data.toString(); // Defaults to utf8
+      console.log('Received text message:', messageString);
+ 
+      // Example: Parse if JSON is expected
+      try {
+        const jsonData = JSON.parse(messageString);
+        console.log('Parsed JSON:', jsonData);
+      } catch (e) {
+        console.log('Message is not valid JSON.');
+      }
+    }
+    // Example: Echo the message back to the client
+    // ws.send(data, { binary: isBinary });
   });
 
   // Send the current state of the document to the new client
