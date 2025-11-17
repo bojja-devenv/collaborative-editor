@@ -1,0 +1,36 @@
+<section>
+  <aside>
+    <div class="config-panel">
+      <h4>Editor Settings</h4>
+      <gui-form [config]="config" [model]="options" [form]="form" />
+    </div>
+  </aside>
+
+  <div>
+
+    <div class="editor-wrap">
+      <code-editor #editor
+                   [style.height]="'500px'"
+                   [(ngModel)]="code"
+                   (ngModelChange)="log($event)"
+                   [theme]="options.theme"
+                   [setup]="options.setup"
+                   [disabled]="options.disabled"
+                   [readonly]="options.readonly"
+                   [placeholder]="options.placeholder"
+                   [indentWithTab]="options.indentWithTab"
+                   [indentUnit]="options.indentUnit"
+                   [lineWrapping]="options.lineWrapping"
+                   [highlightWhitespace]="options.highlightWhitespace"
+                   [language]="options.language"
+                   [languages]="languages" />
+
+      @if (showOutput) {
+      <textarea [style.height]="'500px'" [(ngModel)]="code"></textarea>
+      }
+    </div>
+
+
+  </div>
+</section>
+
